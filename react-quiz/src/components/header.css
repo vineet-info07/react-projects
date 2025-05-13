@@ -1,0 +1,9 @@
+@import url("https://fonts.googleapis.com/css2?family=Codystar&display=swap");
+
+.app-header {
+  width: 66rem;
+  margin-bottom: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

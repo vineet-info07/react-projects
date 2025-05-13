@@ -40,14 +40,6 @@ body {
   width: 50rem;
 }
 
-.app-header {
-  width: 66rem;
-  margin-bottom: 4rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
 .error {
   text-align: center;
   font-size: 1.6rem;
