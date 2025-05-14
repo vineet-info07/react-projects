@@ -6,6 +6,7 @@ import Error from "./components/Error";
 import StartScreen from "./components/StartScreen";
 import "./index.css";
 import Question from "./components/Question";
+import NextButton from "./components/NextButton";
 
 const initialState = {
   questions: [],
@@ -46,6 +47,8 @@ const reducer = (state, action) => {
             : state.points,
       };
     }
+    case "nextQuestion":
+      return { ...state, index: state.index + 1, answer: null };
     default:
       throw new Error("Action unknown");
   }
@@ -63,7 +66,10 @@ function App() {
     fetch("http://localhost:8000/questions")
       .then((res) => res.json())
       .then((data) => dispatch({ type: "dataReceived", payload: data }))
-      .catch((error) => dispatch({ type: "dataFailed" }));
+      .catch((error) => {
+        dispatch({ type: "dataFailed" });
+        console.log(error.message);
+      });
   }, []);
 
   return (
@@ -76,12 +82,15 @@ function App() {
           <StartScreen numQuestions={numQuestions} dispatch={dispatch} />
         )}
         {status === "active" && (
-          <Question
-            question={questions[index]}
-            dispatch={dispatch}
-            answer={answer}
-            points={points}
-          />
+          <>
+            <Question
+              question={questions[index]}
+              dispatch={dispatch}
+              answer={answer}
+              points={points}
+            />
+            <NextButton dispatch={dispatch} answer={answer} />
+          </>
         )}
       </MainComponent>
     </div>
