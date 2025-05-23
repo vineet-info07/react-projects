@@ -9,9 +9,7 @@ const formatDate = (date) =>
     year: "numeric",
   }).format(new Date(date));
 
-// eslint-disable-next-line react/prop-types
 export default function CityItem({ city }) {
-  // eslint-disable-next-line react/prop-types
   const { cityName, emoji, date, id, position } = city;
 
   console.log(position);
