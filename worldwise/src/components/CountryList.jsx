@@ -1,17 +1,17 @@
-/* eslint-disable react/prop-types */
-import CountryItem from "./CountryItem";
-import styles from "./CountryList.module.css";
-import Message from "./Message";
 import Spinner from "./Spinner";
+import styles from "./CountryList.module.css";
+import CountryItem from "./CountryItem";
+import Message from "./Message";
+import { useCities } from "../context/CitiesContext";
 
-export default function CountryList({ cities, isLoading }) {
-  console.log(cities, isLoading);
+function CountryList() {
+  const { cities, isLoading } = useCities();
 
   if (isLoading) return <Spinner />;
 
   if (!cities.length)
     return (
-      <Message message="Add your first city by clciking on a city on the map" />
+      <Message message="Add your first city by clicking on a city on the map" />
     );
 
   const countries = cities.reduce((arr, city) => {
@@ -23,8 +23,10 @@ export default function CountryList({ cities, isLoading }) {
   return (
     <ul className={styles.countryList}>
       {countries.map((country) => (
-        <CountryItem key={country.id} country={country.country} />
+        <CountryItem country={country} key={country.country} />
       ))}
     </ul>
   );
 }
+
+export default CountryList;
